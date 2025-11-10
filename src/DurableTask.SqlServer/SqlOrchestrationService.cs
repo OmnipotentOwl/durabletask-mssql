@@ -65,7 +65,7 @@ namespace DurableTask.SqlServer
                UseSeparateQueueForEntityWorkItems = this.settings.UseSeparateQueueForEntityWorkItems,
            };
 
-        public override EntityBackendQueries? EntityBackendQueries => new EntitySqlBackendQueries(this);
+        public override EntityBackendQueries? EntityBackendQueries => new EntitySqlBackendQueries(this.EntityBackendProperties);
 
         static SqlOrchestrationServiceSettings? ValidateSettings(SqlOrchestrationServiceSettings? settings)
         {
@@ -129,7 +129,7 @@ namespace DurableTask.SqlServer
         public override async Task<TaskOrchestrationWorkItem> LockNextOrchestrationWorkItemAsync(TimeSpan receiveTimeout, CancellationToken cancellationToken)
         {
 #pragma warning disable CS8603 // Possible null reference return. Need to update base signature in IEntityOrchestrationService
-            return await this.LockNextWorkItemAsync(
+            return await this.LockNextTaskOrchestrationWorkItemAsync(
                 receiveTimeout, 
                 cancellationToken,
                 OrchestrationFilterType.OrchestrationsOnly);
@@ -139,7 +139,7 @@ namespace DurableTask.SqlServer
         public override async Task<TaskOrchestrationWorkItem> LockNextEntityWorkItemAsync(TimeSpan receiveTimeout, CancellationToken cancellationToken)
         {
 #pragma warning disable CS8603 // Possible null reference return. Need to update base signature in IEntityOrchestrationService
-            return await this.LockNextWorkItemAsync(
+            return await this.LockNextTaskOrchestrationWorkItemAsync(
                 receiveTimeout, 
                 cancellationToken,
                 OrchestrationFilterType.EntitiesOnly);
@@ -150,13 +150,12 @@ namespace DurableTask.SqlServer
             TimeSpan receiveTimeout,
             CancellationToken cancellationToken)
         {
-            return await this.LockNextWorkItemAsync(
+            return await this.LockNextOrchestrationWorkItemAsync(
                 receiveTimeout,
-                cancellationToken,
-                OrchestrationFilterType.OrchestrationsOnly);
+                cancellationToken);
         }
 
-        async Task<TaskOrchestrationWorkItem?> LockNextWorkItemAsync(
+        async Task<TaskOrchestrationWorkItem?> LockNextTaskOrchestrationWorkItemAsync(
             TimeSpan receiveTimeout,
             CancellationToken cancellationToken,
             OrchestrationFilterType orchestrationFilterType = OrchestrationFilterType.All)
