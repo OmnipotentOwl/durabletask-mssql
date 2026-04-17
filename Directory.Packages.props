@@ -6,7 +6,6 @@
     -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-  
   <!-- Product dependencies -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.Azure.DurableTask.Core" Version="3.9.0" />
@@ -16,9 +15,12 @@
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="SemanticVersion" Version="2.1.0" />
   </ItemGroup>
-  
   <!-- Test dependencies -->
   <ItemGroup>
+    <PackageVersion Include="Microsoft.Azure.Functions.Worker" Version="2.2.0" />
+    <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.DurableTask" Version="1.14.0" />
+    <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.3.0" />
+    <PackageVersion Include="Microsoft.Azure.Functions.Worker.Sdk" Version="2.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Logging.EventSource" Version="6.0.1" />
     <PackageVersion Include="Microsoft.NET.Sdk.Functions" Version="4.6.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
@@ -28,7 +30,6 @@
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.1" />
   </ItemGroup>
-  
   <!-- Transitive dependency pinning -->
   <ItemGroup>
     <!-- NOTE: We can't upgrade past Azure.Core v1.43.0 until the Azure Functions host also updates to this version
