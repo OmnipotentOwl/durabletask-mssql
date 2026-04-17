@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "SQLDB_Connection": "Server=(localdb)\\MSSQLLocalDB;Database=DurableDB;Trusted_Connection=True;",
+    "AzureWebJobsSecretStorageType": "Files",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true"
+  }
+}
